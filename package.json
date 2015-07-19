@@ -23,5 +23,16 @@
     "browserify": "~11",
     "eslint": "^1.0.0-rc-1",
     "uglify-js": "~2"
-  }
+  },
+  "dependencies": {
+    "hex-color-regex": "^1.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imsky/grady.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imsky/grady/issues"
+  },
+  "homepage": "https://github.com/imsky/grady"
 }
