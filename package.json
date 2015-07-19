@@ -18,10 +18,10 @@
   "author": "Ivan Malopinsky",
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^3.1.23",
+    "babel-eslint": "~3",
     "babelify": "~6",
     "browserify": "~11",
-    "eslint": "^1.0.0-rc-1",
+    "eslint": "~1",
     "uglify-js": "~2"
   },
   "dependencies": {
