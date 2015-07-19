@@ -1,0 +1,27 @@
+{
+  "name": "grady",
+  "version": "0.0.0",
+  "description": "Gradient generator for CSS, SVG, and canvas",
+  "main": "grady.js",
+  "scripts": {
+    "bundle": "browserify lib/index.js -s Grady -t babelify --outfile grady.js",
+    "minify": "uglifyjs grady.js -o grady.min.js",
+    "lint": "eslint lib",
+    "build": "npm run lint && npm run bundle && npm run minify"
+  },
+  "keywords": [
+    "css",
+    "svg",
+    "canvas",
+    "gradient"
+  ],
+  "author": "Ivan Malopinsky",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^3.1.23",
+    "babelify": "~6",
+    "browserify": "~11",
+    "eslint": "^1.0.0-rc-1",
+    "uglify-js": "~2"
+  }
+}
