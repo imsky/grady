@@ -1,0 +1,85 @@
+<!doctype html>
+<!--
+Basic HTML from Quickstart
+qkst.io/html/basic
+-->
+<html lang="en" dir="ltr">
+  <head>
+    <title>Hello World</title>
+    <meta name="description" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="http://necolas.github.io/normalize.css/latest/normalize.css">
+    <style>
+      body {
+        margin: 1em;
+      }
+
+      .thumb {
+        width: 300px;
+        text-align: center;
+      }
+
+      .native, .canvas, .svg {
+        width: 300px;
+        height: 200px;
+      }
+
+      .canvas canvas {
+        width: 300px;
+        height: 200px;
+      }
+
+      .caption {
+        text-align: center;
+        font-weight: bold;
+        padding: 20px;
+      }
+
+      .row {
+        width: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      .row .thumb {
+        float: left;
+      }
+
+      #native_angle {
+        background: linear-gradient(45deg, #ff0000, #0000ff);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="thumb">
+        <div class="native" id="native_angle"></div>
+        <div class="caption">Native angle</div>
+      </div>
+      <div class="thumb">
+        <div class="canvas">
+          <canvas id="canvas_angle"></canvas>
+        </div>
+        <div class="caption">Canvas angle</div>
+      </div>
+       <div class="thumb">
+        <div class="svg">
+        </div>
+        <div class="caption">SVG angle</div>
+      </div>
+    </div>
+    <script src="grady.js"></script>
+    <script>
+      var width = 300;
+      var height = 200;
+
+      var grady = Grady('linear-gradient(45deg, #ff0000, #0000ff)');
+
+      var angle_ctx = document.getElementById('canvas_angle').getContext('2d');
+      angle_ctx.fillStyle = grady.canvas(angle_ctx, width, height);
+      angle_ctx.fillRect(0, 0, width, height);
+    </script>
+  </body>
+</html>
