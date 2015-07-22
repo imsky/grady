@@ -5,7 +5,7 @@ qkst.io/html/basic
 -->
 <html lang="en" dir="ltr">
   <head>
-    <title>Hello World</title>
+    <title>Grady Test</title>
     <meta name="description" content="">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -39,7 +39,7 @@ qkst.io/html/basic
 
       .row {
         width: 900px;
-        margin: 0 auto;
+        margin: 30px auto;
         overflow: hidden;
       }
 
@@ -70,16 +70,30 @@ qkst.io/html/basic
         <div class="caption">SVG angle</div>
       </div>
     </div>
+
+    <canvas id="test" width="300" height="300"></canvas>
     <script src="grady.js"></script>
     <script>
       var width = 300;
       var height = 200;
-
-      var grady = Grady('linear-gradient(45deg, #ff0000, #0000ff)');
-
+      var angle = 45;
       var angle_ctx = document.getElementById('canvas_angle').getContext('2d');
-      angle_ctx.fillStyle = grady.canvas(angle_ctx, width, height);
-      angle_ctx.fillRect(0, 0, width, height);
+
+      function draw () {
+        var grady = Grady('linear-gradient('+angle+'deg, #ff0000, #0000ff)');
+        console.log('linear-gradient('+angle+'deg, #ff0000, #0000ff)');
+        angle_ctx.fillStyle = grady.canvas(width, height);
+        angle_ctx.fillRect(0, 0, width, height);
+      }
+
+      function loop () {
+        draw();
+        angle = (angle + 1) % 360;
+        setTimeout(loop, 100);
+      }
+
+      angle += 90;
+      draw();
     </script>
   </body>
 </html>
