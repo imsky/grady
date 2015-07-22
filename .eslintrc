@@ -25,7 +25,7 @@
         "strict": 0,
         "no-var": 2,
         "comma-dangle": [2, "never"],
-        "no-console": 2,
+        "no-console": 1,
         "no-debugger": 2,
         "no-alert": 2,
         "no-unreachable": 2,
