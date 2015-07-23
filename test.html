@@ -46,17 +46,13 @@ qkst.io/html/basic
       .row .thumb {
         float: left;
       }
-
-      #native_angle {
-        background: linear-gradient(45deg, #ff0000, #0000ff);
-      }
     </style>
   </head>
   <body>
     <div class="row">
       <div class="thumb">
-        <div class="native" id="native_angle"></div>
-        <div class="caption">Native angle</div>
+        <div class="native" id="css_angle"></div>
+        <div class="caption">CSS angle</div>
       </div>
       <div class="thumb">
         <div class="canvas">
@@ -66,6 +62,10 @@ qkst.io/html/basic
       </div>
        <div class="thumb">
         <div class="svg">
+          <svg width="300" height="200" id="svg_angle">
+            <defs></defs>
+            <rect fill="url(#gradient)" x="0" y="0" width="100%" height="100%"/>
+          </svg>
         </div>
         <div class="caption">SVG angle</div>
       </div>
@@ -76,23 +76,39 @@ qkst.io/html/basic
     <script>
       var width = 300;
       var height = 200;
-      var angle = 45;
+      var angle = 90;
       var angle_ctx = document.getElementById('canvas_angle').getContext('2d');
 
+      function linearGradient (deg, a, b) {
+        return 'linear-gradient('+deg+'deg,'+a+','+b+')';
+      }
+
       function draw () {
-        var grady = Grady('linear-gradient('+angle+'deg, #ff0000, #0000ff)');
-        console.log('linear-gradient('+angle+'deg, #ff0000, #0000ff)');
+        var a = '#ff0000', b = '#0000ff';
+        var gradient = linearGradient(angle, a, b);
+        console.log(gradient);
+
+        var grady = Grady(gradient);
+
+        document.getElementById('css_angle').style.background = gradient;
         angle_ctx.fillStyle = grady.canvas(width, height);
         angle_ctx.fillRect(0, 0, width, height);
+        var svg = document.getElementById('svg_angle');
+        if (svg.getElementById('gradient')) {
+          var _g = svg.getElementById('gradient');
+          _g.parentNode.removeChild(_g);
+        }
+        var _defs = svg.getElementsByTagName('defs')[0];
+        _defs.appendChild(grady.svg());
       }
 
-      function loop () {
+      function loop (stopLooping) {
         draw();
         angle = (angle + 1) % 360;
-        setTimeout(loop, 100);
+        if (!window.stopLooping) {
+          setTimeout(loop, 100);    
+        }
       }
-
-      angle += 90;
       draw();
     </script>
   </body>
