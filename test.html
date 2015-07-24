@@ -38,13 +38,14 @@ qkst.io/html/basic
       }
 
       .row {
-        width: 900px;
+        width: 960px;
         margin: 30px auto;
         overflow: hidden;
       }
 
       .row .thumb {
         float: left;
+        margin: 0px 10px;
       }
     </style>
   </head>
@@ -76,15 +77,15 @@ qkst.io/html/basic
     <script>
       var width = 300;
       var height = 200;
-      var angle = 90;
+      var angle = 45;
       var angle_ctx = document.getElementById('canvas_angle').getContext('2d');
 
       function linearGradient (deg, a, b) {
-        return 'linear-gradient('+deg+'deg,'+a+','+b+')';
+        return 'linear-gradient('+deg+'deg,'+a+' 0%,'+b+' 50%,'+a+' 50%,'+b+' 100%)';
       }
 
       function draw () {
-        var a = '#ff0000', b = '#0000ff';
+        var a = '#1A2980', b = '#26D0CE';
         var gradient = linearGradient(angle, a, b);
         console.log(gradient);
 
