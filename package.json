@@ -1,6 +1,6 @@
 {
   "name": "grady",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Gradient generator for CSS, SVG, and canvas",
   "main": "grady.js",
   "scripts": {
