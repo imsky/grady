@@ -71,7 +71,6 @@ qkst.io/html/basic
       </div>
     </div>
 
-    <canvas id="test" width="150" height="100"></canvas>
     <script src="grady.js"></script>
     <script>
       var width = 150;
@@ -80,7 +79,7 @@ qkst.io/html/basic
       var angle_ctx = document.getElementById('canvas_angle').getContext('2d');
 
       function linearGradient (deg, a, b) {
-        return 'linear-gradient('+deg+'deg,'+a+' 0%,'+b+' 50%,'+a+' 50%,'+b+' 100%)';
+        return 'linear-gradient('+deg+'deg,'+a+' 0%,'+b+' 50%,'+a+' 50%,#C04848 100%)';
       }
 
       function draw () {
@@ -91,7 +90,7 @@ qkst.io/html/basic
         var grady = Grady(gradient);
 
         document.getElementById('native_angle').style.background = gradient;
-        angle_ctx.fillStyle = grady.canvas(width, height);
+        angle_ctx.fillStyle = grady.canvas(document.getElementById('canvas_angle'));
         angle_ctx.fillRect(0, 0, width, height);
         var svg = document.getElementById('svg_angle');
         if (svg.getElementById('gradient')) {
@@ -99,7 +98,10 @@ qkst.io/html/basic
           _g.parentNode.removeChild(_g);
         }
         var _defs = svg.getElementsByTagName('defs')[0];
-        _defs.appendChild(grady.svg());
+        var _rect = svg.getElementsByTagName('rect')[0];
+        var gradySvg = grady.svg(svg);
+        _defs.appendChild(gradySvg);
+        _rect.setAttribute('fill', 'url(#'+gradySvg.id+')');
 
         var css = grady.css({inline: true});
         console.log(css);
