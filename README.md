@@ -5,7 +5,7 @@ Grady creates gradients in CSS, SVG, and Canvas format from a standard syntax.
 ## Installing
 
 * [npm](https://www.npmjs.com/package/grady): `npm install grady`
-* [RawGit](https://cdn.rawgit.com/imsky/grady/master/grady.js)
+* RawGit: <https://cdn.rawgit.com/imsky/grady/master/grady.js>
 
 ## Usage
 
@@ -27,13 +27,13 @@ var canvas = grady.canvas(300, 200);
 
 ## Browser support
 
+* SVG: <http://caniuse.com/#search=svg>
+* Canvas: <http://caniuse.com/#search=canvas>
 * CSS: <http://caniuse.com/#search=gradient>
 * Prefixed CSS:
   * Firefox: 3.6+
   * Webkit: Chrome 10+, Android 4.3-, iOS 6.1-, Safari 6
   * Opera: 11.10+
-* SVG: <http://caniuse.com/#search=svg>
-* Canvas: <http://caniuse.com/#search=canvas>
 
 ## License
 
@@ -41,4 +41,4 @@ Grady is provided under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Credits
 
-Grady is a project by [Ivan Malopinsly](http://imsky.co).
+Grady is a project by [Ivan Malopinsky](http://imsky.co).
