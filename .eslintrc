@@ -30,6 +30,7 @@
         "no-alert": 2,
         "no-unreachable": 2,
         "no-empty": 2,
-        "no-undef": 2
+        "no-undef": 2,
+        "semi": [1, "always"]
     }
 }
