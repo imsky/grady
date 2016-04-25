@@ -302,7 +302,7 @@ exports['default'] = function (input) {
   if (type === 'linear') {
     pdef = parseLinearGradient(def);
   } else {
-    'Gradient type not supported: ' + type;
+    throw 'Gradient type not supported: ' + type;
   }
 
   gradient.angle = pdef.angle;
@@ -342,33 +342,37 @@ exports['default'] = function (gradients) {
 
   return function (svg) {
     if (!svg) throw 'SVG reference not supplied';
-    if (!svg.width || !svg.height || !svg.viewBox) throw 'No SVG dimensions available';
 
     var gradient = gradients[0];
     var id = 'grady-' + Number(new Date()).toString(36);
+    var svgWidth = svg.getAttribute('width');
+    var svgHeight = svg.getAttribute('height');
+    var svgViewBox = svg.getAttribute('viewBox');
+
+    if (!(svgWidth && svgHeight) && !svgViewBox) throw 'No SVG dimensions available';
 
     var aspectRatio = 1;
     var retval = undefined;
 
-    if (svg.width && svg.height) {
-      aspectRatio = svg.width / svg.height;
-    } else if (svg.viewBox) {
-      var viewBox = svg.viewBox.split(' ').map(Number);
+    if (svgWidth && svgHeight) {
+      aspectRatio = parseFloat(svgWidth) / parseFloat(svgHeight);
+    } else if (svgViewBox) {
+      var viewBox = svgViewBox.split(' ').map(Number);
       // assumes min-x and min-y are 0
-      aspectRatio = viewBox[2] / viewBox[3];
+      aspectRatio = parseFloat(viewBox[2]) / parseFloat(viewBox[3]);
     }
 
     if (gradient.type === 'linear') {
       (function () {
         var angle = gradient.angle;
-        var coords = (0, _utils.endPointsFromAngle)(angle, 1, 1);
+        var coords = (0, _utils.endPointsFromAngle)(angle, aspectRatio, 1);
 
         var lg = document.createElementNS(SVG_NS, 'linearGradient');
         lg.setAttribute('id', id);
-        lg.setAttribute('x1', coords[0]);
-        lg.setAttribute('x2', coords[2]);
-        lg.setAttribute('y1', coords[1]);
-        lg.setAttribute('y2', coords[3]);
+        lg.setAttribute('y1', -coords[0] / aspectRatio);
+        lg.setAttribute('y2', -coords[2] / aspectRatio);
+        lg.setAttribute('x1', coords[1]);
+        lg.setAttribute('x2', coords[3]);
 
         gradient.stops.forEach(function (stop) {
           var el = document.createElementNS(SVG_NS, 'stop');
@@ -462,6 +466,15 @@ function endPointsFromAngle(angle, width, height) {
 }
 
 ;
+
+/* sketch for next implementation:
+1. calculate the mod 90 degrees in one destructured step:
+   [f(angle, 270), f(angle(0), f(angle, 90), f(angle, 180)]
+2. get the relevant corner (45 deg = top right from origin) 
+3. get line equation for line that goes through corner (LC) with slope perpendicular to line that goes through origin (LO)
+4. get intersection of LC and LO
+5. reflect intersection across origin to be the starting point
+*/
 
 },{}],8:[function(require,module,exports){
 /*!
